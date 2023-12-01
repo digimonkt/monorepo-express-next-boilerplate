@@ -1,9 +1,15 @@
-import { type Application, type Response } from "express";
+import {
+  type Request,
+  type Application,
+  type Response,
+  type NextFunction,
+} from "express";
 import ResponseSenderMiddleware from "./responseSenderMiddleware";
+import JwtService from "../utils/jwtService";
 
 const setupGlobalCustomMiddleware = (app: Application) => {
   // response sender middleware
-  app.use((_req, res: Response, next) => {
+  app.use((_req, res: Response, next: NextFunction) => {
     const responseSenderMiddleware = new ResponseSenderMiddleware(res);
     res.sendSuccess200Response =
       responseSenderMiddleware.sendSuccess200Response.bind(
@@ -44,6 +50,11 @@ const setupGlobalCustomMiddleware = (app: Application) => {
       responseSenderMiddleware.sendCustomErrorResponse.bind(
         responseSenderMiddleware,
       );
+    next();
+  });
+  app.use((req: Request, _res: Response, next: NextFunction) => {
+    const jwtService = new JwtService();
+    req.jwt = jwtService;
     next();
   });
 };

@@ -4,12 +4,14 @@
 cd "$(dirname "$0")/.." || exit
 
 # Install dependencies 
-yarn install
+yarn install --frozen-lockfile
 
 # Create .env file in the 'api' package
 api_env_file="./packages/api/.env"
 echo "PORT=4000" > "$api_env_file"
 echo "MONGODB_URI=" >> "$api_env_file"
+echo "" >> "$api_env_file"
+echo "JWT_SECRET=secret" >> "$api_env_file"
 echo "" >> "$api_env_file"
 echo "# The following variables are required for sending emails" >> "$api_env_file"
 echo "EMAIL_SERVICE=" >> "$api_env_file"

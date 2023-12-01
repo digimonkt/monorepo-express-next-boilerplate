@@ -1,4 +1,4 @@
-import authRoute from "../module/auth.template/auth.routes";
+import authRoute from "../module/auth/auth.routes";
 
 const router = [
   {

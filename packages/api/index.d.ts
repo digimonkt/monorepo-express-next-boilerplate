@@ -1,5 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Response } from "express";
+import { Request, Response } from "express";
+import type JwtService from "./src/utils/jwtService";
 declare global {
   namespace Express {
     interface Response {
@@ -13,6 +14,9 @@ declare global {
       sendErrorResponse: (message: string, data: any | null) => void;
       sendCustomSuccessResponse: (message: string, data: any | null) => void;
       sendCustomErrorResponse: (message: string, data: any | null) => void;
+    }
+    interface Request {
+      jwt: JwtService;
     }
   }
 }

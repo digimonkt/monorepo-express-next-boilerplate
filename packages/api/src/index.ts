@@ -8,10 +8,9 @@ import fileUpload from "express-fileupload";
 import logger from "./utils/logger";
 import setupGlobalCustomMiddleware from "./middleware";
 dotenv.config({
-  path: path.resolve(process.cwd(), "/.env"),
+  path: path.resolve(".env"),
 });
 const PORT = process.env.PORT ?? 4000;
-
 // database connection
 const db = new Database(
   process.env.mongoURI ?? "mongodb://0.0.0.0:27017/social-media",
