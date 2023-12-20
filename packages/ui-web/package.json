@@ -16,6 +16,7 @@
     "@monorepo/api-client": "1.0.0",
     "@monorepo/shared-constants": "1.0.0",
     "@monorepo/ui-core": "1.0.0",
+    "@svgr/webpack": "^8.1.0",
     "next": "14.0.1",
     "react": "^18",
     "react-dom": "^18",

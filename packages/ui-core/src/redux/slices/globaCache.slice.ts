@@ -1,7 +1,7 @@
 import { UserType } from "@monorepo/api-client/src/models/CreateUserResponseDto";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { JWTUserClaims } from "src/helpers/token";
-import { RootState } from "src/redux/store";
+import { JWTUserClaims } from "../../helpers/token";
+import { RootState } from "../../redux/store";
 interface GlobalCacheInitialState {
   user: UserType | undefined | null;
   userId: string;
