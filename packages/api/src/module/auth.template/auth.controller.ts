@@ -71,7 +71,7 @@ class AuthController {
     } catch (error) {
       res
         .status(401)
-        .send({ message: "Authentication failed", error: error.message });
+        .send({ message: "Email address or password is incorrect" });
     }
   };
 }
