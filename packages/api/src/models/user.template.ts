@@ -6,6 +6,8 @@ export interface User {
   password: string; // Store the hashed password
   firstName: string;
   lastName: string;
+  isVerifiedEmail: boolean;
+  isLocked: boolean;
 }
 
 export interface UserDocument extends User, Document {

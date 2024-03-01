@@ -1,9 +1,10 @@
+import type mongoose from "mongoose";
 import { type FilterQuery } from "mongoose";
 import { UserModel } from "../../models";
 import { type User, type UserDocument } from "../../models/user.template";
 
 export class UserService {
-  public async findById(id: string) {
+  public async findById(id: string | mongoose.Schema.Types.ObjectId) {
     const user = await UserModel.findById(id);
     return user;
   }
