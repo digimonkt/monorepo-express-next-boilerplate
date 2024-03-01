@@ -33,4 +33,4 @@ export const tokenStillValid = (
   return token.exp - Date.now() / 1000 > timeRemaining;
 };
 // Refresh if the access token has less than or equal to this time remaining (in seconds).
-export const REFRESH_TIME_REMAINING = 5 * secondsInMinute;
+export const REFRESH_TIME_REMAINING = 15 * secondsInMinute;
