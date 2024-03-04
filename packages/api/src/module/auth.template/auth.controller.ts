@@ -74,6 +74,28 @@ class AuthController {
         .send({ message: "Email address or password is incorrect" });
     }
   };
+
+  public refreshAccessToken = async (req: Request, res: Response) => {
+    try {
+      const { refreshToken } = req.body;
+
+      // Verify refresh token
+      const accessToken =
+        await this.authService.getAccessTokenFromRefreshToken(refreshToken);
+
+      if (!accessToken) {
+        throw new Error("Invalid refresh token");
+      }
+
+      this.setAccessTokenToHeader(res, accessToken);
+      res.status(200).send({ message: "Access token refreshed successfully" });
+    } catch (error) {
+      res.status(401).send({
+        message: "Error refreshing access token",
+        error: error.message,
+      });
+    }
+  };
 }
 
 export default AuthController;

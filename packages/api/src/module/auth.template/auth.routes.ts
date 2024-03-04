@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  createRefreshTokenValidator,
   createUserBodyValidator,
   createUserSessionValidator,
 } from "./auth.schema";
@@ -18,6 +19,12 @@ authRoute.post(
   "/create-session",
   joiValidator.validate(createUserSessionValidator, "body"),
   authController.createSession,
+);
+
+authRoute.post(
+  "/refresh-access-token",
+  joiValidator.validate(createRefreshTokenValidator, "body"),
+  authController.refreshAccessToken,
 );
 
 export default authRoute;
