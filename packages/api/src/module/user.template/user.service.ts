@@ -18,19 +18,4 @@ export class UserService {
     const newUser = await UserModel.create(user);
     return newUser;
   }
-
-  public async updateById(
-    id: string | mongoose.Schema.Types.ObjectId,
-    updates: Partial<User>,
-  ) {
-    const updatedUser = await UserModel.findByIdAndUpdate(id, updates, {
-      new: true,
-    });
-    return updatedUser;
-  }
-
-  public async deleteById(id: mongoose.Schema.Types.ObjectId | string) {
-    const deletedUser = await UserModel.findByIdAndDelete(id);
-    return deletedUser;
-  }
 }

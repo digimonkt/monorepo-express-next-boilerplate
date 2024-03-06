@@ -1,7 +1,6 @@
 import { type Request, type Response } from "express";
 import { UserService } from "../user.template/user.service";
 import { AuthService } from "./auth.service"; // Import AuthService
-
 class AuthController {
   private readonly userService: UserService;
   private readonly authService: AuthService; // Add AuthService
@@ -94,6 +93,20 @@ class AuthController {
         message: "Error refreshing access token",
         error: error.message,
       });
+    }
+  };
+
+  public logout = async (req: Request, res: Response) => {
+    if (!req.sessionId) {
+      return;
+    }
+    try {
+      await this.authService.logoutSession(req.sessionId);
+      res.status(200).send({ message: "User logout successfully" });
+    } catch (error) {
+      res
+        .status(400)
+        .send({ message: "Error logging out user", error: error.message });
     }
   };
 }

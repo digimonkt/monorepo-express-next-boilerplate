@@ -3,6 +3,7 @@ import {
   type CreateSessionType,
   type JwtRefreshTokenPayload,
   type JwtRefreshTokenClaims,
+  type JwtAccessTokenClaims,
 } from "./auth.types";
 import { UserSessionModel } from "../../models";
 import JwtService from "../../utils/jwt";
@@ -98,5 +99,32 @@ export class AuthService {
       return accessToken;
     }
     return null;
+  }
+
+  public async verifyAccessToken(
+    token: string,
+  ): Promise<JwtAccessTokenClaims | null> {
+    try {
+      const decoded = await this.jwtService.verify(token);
+      return decoded;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  public async logoutSession(sessionId: string) {
+    try {
+      const session = await UserSessionModel.findById(sessionId);
+      if (!session) {
+        throw new Error("Session not found");
+      }
+      // Update session details
+      session.isValidSession = false;
+      session.expiredAt = new Date();
+      await session.save();
+      return session;
+    } catch (error) {
+      throw new Error(`Error updating session: ${error.message}`);
+    }
   }
 }
