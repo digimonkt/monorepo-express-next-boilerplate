@@ -35,7 +35,10 @@ app.use(fileUpload());
 
 app.use((_req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Expose-Headers", "x-access, x-refresh");
+  res.setHeader(
+    "Access-Control-Expose-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization, x-access, x-refresh",
+  );
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, PATCH, PUT, DELETE, OPTIONS",
