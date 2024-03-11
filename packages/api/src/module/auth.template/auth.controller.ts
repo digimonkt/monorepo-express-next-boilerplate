@@ -66,11 +66,12 @@ class AuthController {
 
       this.setAccessTokenToHeader(res, accessToken);
       this.setRefreshTokenToHeader(res, refreshToken);
-      res.status(200).send({ message: "User logged in successfully", user });
+      res.sendSuccess200Response("User logged in successfully", { user });
     } catch (error) {
-      res
-        .status(401)
-        .send({ message: "Email address or password is incorrect" });
+      res.sendUnauthorized401Response(
+        "Email address or password is incorrect",
+        error,
+      );
     }
   };
 
@@ -87,12 +88,11 @@ class AuthController {
       }
 
       this.setAccessTokenToHeader(res, accessToken);
-      res.status(200).send({ message: "Access token refreshed successfully" });
-    } catch (error) {
-      res.status(401).send({
-        message: "Error refreshing access token",
-        error: error.message,
+      res.sendSuccess200Response("Access token refreshed successfully", {
+        accessToken,
       });
+    } catch (error) {
+      res.sendUnauthorized401Response("Error refreshing access token", error);
     }
   };
 
@@ -102,11 +102,9 @@ class AuthController {
     }
     try {
       await this.authService.logoutSession(req.sessionId);
-      res.status(200).send({ message: "User logout successfully" });
+      res.sendSuccess200Response("User logout successfully");
     } catch (error) {
-      res
-        .status(400)
-        .send({ message: "Error logging out user", error: error.message });
+      res.sendBadRequest400Response("Error logging out user", error);
     }
   };
 }

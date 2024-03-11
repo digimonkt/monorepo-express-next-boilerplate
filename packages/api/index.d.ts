@@ -4,7 +4,7 @@ import { type UserDocument } from "./src/models/user.template";
 declare global {
   namespace Express {
     interface Response {
-      sendSuccess200Response: (message: string, data: any | null) => void;
+      sendSuccess200Response: (message: string, data?: any | null) => void;
       sendCreated201Response: (message: string, data: any | null) => void;
       sendNoContent204Response: () => void;
       sendNotFound404Response: (message: string, data: any | null) => void;
