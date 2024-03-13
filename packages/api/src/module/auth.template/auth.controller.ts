@@ -102,7 +102,7 @@ class AuthController {
     }
     try {
       await this.authService.logoutSession(req.sessionId);
-      res.sendSuccess200Response("User logout successfully");
+      res.sendNoContent204Response();
     } catch (error) {
       res.sendBadRequest400Response("Error logging out user", error);
     }
