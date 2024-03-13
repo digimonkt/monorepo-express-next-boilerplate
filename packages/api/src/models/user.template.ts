@@ -6,6 +6,8 @@ export interface User {
   password: string; // Store the hashed password
   firstName: string;
   lastName: string;
+  isVerifiedEmail: boolean;
+  isLocked: boolean;
 }
 
 export interface UserDocument extends User, Document {
@@ -22,6 +24,8 @@ const userSchema = new Schema<UserDocument>(
     password: { type: String, required: true },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
+    isVerifiedEmail: { type: Boolean, default: false },
+    isLocked: { type: Boolean, default: false },
   },
   {
     timestamps: true,
